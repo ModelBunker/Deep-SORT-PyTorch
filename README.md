@@ -3,16 +3,28 @@
 
 PyTorch implementation of the paper [Deep SORT](https://arxiv.org/abs/1703.07402).
 
-## Latest Update(07-22)
-Changes
-- bug fix (Thanks @JieChen91 and @yingsen1 for bug reporting).  
-- using batch for feature extracting for each frame, which lead to a small speed up.  
-- code improvement.
+The file **todo.sh** contains all build instructions, so either run it with ./todo.sh or copy paste the following into your shell.
+```
+docker build -t deepsort .
 
-Futher improvement direction  
-- Train detector on specific dataset rather than the official one.
-- Retrain REID model on pedestrain dataset for better performance.
-- Replace YOLOv3 detector with advanced ones.
+docker volume create --opt type=none \
+                     --opt o=bind \
+                     --opt device=. \
+                     dpsrt-vol
+
+docker run --gpus all -it \
+           -p 5001:6006 \
+           --name deepsort_cnt \
+           -v dpsrt-vol:/home/PyTorch-YOLOv3/:rw \
+           deepsort
+
+cd Object-Tracking/deep_sort_pytorch
+
+python demo_yolo3_deepsort.py /home/frank/modelbunker/models/Object-Tracking/deep_sort_pytorch/images/bab.avi
+```
+
+## Detailled README.
+
 
 ![](examples/demo.gif)
 
@@ -95,6 +107,17 @@ Then you can try [train.py](deep_sort/deep/train.py) to train your own parameter
 ![2.jpg](examples/2.jpg)
 
 
+## Latest Update(07-22)
+Changes
+- bug fix (Thanks @JieChen91 and @yingsen1 for bug reporting).  
+- using batch for feature extracting for each frame, which lead to a small speed up.  
+- code improvement.
+
+Futher improvement direction  
+- Train detector on specific dataset rather than the official one.
+- Retrain REID model on pedestrain dataset for better performance.
+- Replace YOLOv3 detector with advanced ones.
+
 ## References
 - paper: [Simple Online and Realtime Tracking with a Deep Association Metric](https://arxiv.org/abs/1703.07402)
 
@@ -103,4 +126,5 @@ Then you can try [train.py](deep_sort/deep/train.py) to train your own parameter
 - paper: [YOLOv3](https://pjreddie.com/media/files/papers/YOLOv3.pdf)
 
 - code: [Joseph Redmon/yolov3](https://pjreddie.com/darknet/yolo/)
+
 
