@@ -1,5 +1,7 @@
 
-# Deep Sort with PyTorch
+# Deep SORT - PyTorch
+
+PyTorch implementation of the paper [Deep SORT](https://arxiv.org/abs/1703.07402).
 
 ## Latest Update(07-22)
 Changes
@@ -12,9 +14,7 @@ Futher improvement direction
 - Retrain REID model on pedestrain dataset for better performance.
 - Replace YOLOv3 detector with advanced ones.
 
-Any contributions to this repository is welcome!
-
-![](images/demo.gif)
+![](examples/demo.gif)
 
 
 ## Introduction
@@ -104,8 +104,3 @@ Then you can try [train.py](deep_sort/deep/train.py) to train your own parameter
 
 - code: [Joseph Redmon/yolov3](https://pjreddie.com/darknet/yolo/)
 
-
-
-=======
-# Object-Tracking
-Models for locating a moving object (or multiple objects) over time using a camera.
