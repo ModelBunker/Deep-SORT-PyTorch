@@ -89,11 +89,11 @@ Then you can try [train.py](deep_sort/deep/train.py) to train your own parameter
 ![train.jpg](deep_sort/deep/train.jpg)
 
 ## Demo videos and images
-[demo.avi](https://drive.google.com/drive/folders/1xhG0kRH1EX5B9_Iz8gQJb7UNnn_riXi6)
+[demo.avi](examples/bab.avi)
 [demo2.avi](https://drive.google.com/drive/folders/1xhG0kRH1EX5B9_Iz8gQJb7UNnn_riXi6)
 
-![1.jpg](images/1.jpg)
-![2.jpg](images/2.jpg)
+![1.jpg](examples/1.jpg)
+![2.jpg](examples/2.jpg)
 
 
 ## References
