@@ -44,9 +44,9 @@ def detect(cfgfile, weightfile, imgfolder):
         class_names = load_class_names(namesfile)
         img = plot_boxes(img, boxes, 'result/{}'.format(os.path.basename(imgfile)), class_names)
         img = np.array(img)
-        cv2.imshow('{}'.format(os.path.basename(imgfolder)), img)
-        cv2.resizeWindow('{}'.format(os.path.basename(imgfolder)), 1000,800)
-        cv2.waitKey(1000)
+        #cv2.imshow('{}'.format(os.path.basename(imgfolder)), img)
+        #cv2.resizeWindow('{}'.format(os.path.basename(imgfolder)), 1000,800)
+        cv2.waitKey(500)
 
 def detect_cv2(cfgfile, weightfile, imgfile):
     import cv2

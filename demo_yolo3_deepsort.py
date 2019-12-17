@@ -14,9 +14,11 @@ class Detector(object):
     def __init__(self, args):
         self.args = args
         use_cuda = bool(strtobool(self.args.use_cuda))
+
         if args.display:
-            cv2.namedWindow("test", cv2.WINDOW_NORMAL)
-            cv2.resizeWindow("test", args.display_width, args.display_height)
+            pass
+            #cv2.namedWindow("test", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("test", args.display_width, args.display_height)
 
         self.vdo = cv2.VideoCapture()
         self.yolo3 = YOLOv3(args.yolo_cfg, args.yolo_weights, args.yolo_names, is_xywh=True, conf_thresh=args.conf_thresh, nms_thresh=args.nms_thresh, use_cuda=use_cuda)
@@ -50,9 +52,10 @@ class Detector(object):
             im = cv2.cvtColor(ori_im, cv2.COLOR_BGR2RGB)
             im = ori_im
             bbox_xcycwh, cls_conf, cls_ids = self.yolo3(im)
+            
             if bbox_xcycwh is not None:
                 # select class person
-                mask = cls_ids==0
+                mask = cls_ids== (2 or 7) 
 
                 bbox_xcycwh = bbox_xcycwh[mask]
                 bbox_xcycwh[:,3:] *= 1.2
@@ -60,6 +63,7 @@ class Detector(object):
                 cls_conf = cls_conf[mask]
                 outputs = self.deepsort.update(bbox_xcycwh, cls_conf, im)
                 if len(outputs) > 0:
+                    print(bbox_xcycwh, cls_conf, cls_ids)
                     bbox_xyxy = outputs[:,:4]
                     identities = outputs[:,-1]
                     ori_im = draw_bboxes(ori_im, bbox_xyxy, identities)
@@ -68,8 +72,9 @@ class Detector(object):
             print("time: {}s, fps: {}".format(end-start, 1/(end-start)))
 
             if self.args.display:
-                cv2.imshow("test", ori_im)
-                cv2.waitKey(1)
+                pass
+                #cv2.imshow("test", ori_im)
+                #cv2.waitKey(1)
 
             if self.args.save_path:
                 self.output.write(ori_im)
@@ -78,6 +83,7 @@ class Detector(object):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("VIDEO_PATH", type=str)
+    #parser.add_argument("--display", dest='feature', action='store_false') # DOES NOT WORK YET
     parser.add_argument("--yolo_cfg", type=str, default="YOLOv3/cfg/yolo_v3.cfg")
     parser.add_argument("--yolo_weights", type=str, default="YOLOv3/yolov3.weights")
     parser.add_argument("--yolo_names", type=str, default="YOLOv3/cfg/coco.names")
