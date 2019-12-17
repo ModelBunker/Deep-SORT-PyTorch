@@ -1,9 +1,0 @@
-# Folders
-__pycache__/
-
-
-# Files
-*.weights
-*.t7
-*.mp4
-*.avi
