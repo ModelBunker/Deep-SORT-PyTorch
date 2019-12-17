@@ -1,3 +1,4 @@
+
 # Deep Sort with PyTorch
 
 ## Latest Update(07-22)
@@ -106,3 +107,6 @@ Then you can try [train.py](deep_sort/deep/train.py) to train your own parameter
 
 
 
+=======
+# Object-Tracking
+Models for locating a moving object (or multiple objects) over time using a camera.
